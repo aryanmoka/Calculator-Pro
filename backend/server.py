@@ -23,6 +23,18 @@ CORS(app)
 # Instantiate AI Assistant
 ai_assistant = AIAssistant()
 
+# ✅ Root route for Render homepage
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({
+        "project": "OmniCalc Backend",
+        "status": "running ✅",
+        "endpoints": {
+            "send_email": "/send-email (POST)",
+            "ai_query": "/api/ai_query (POST)"
+        }
+    })
+
 @app.route('/send-email', methods=['POST'])
 def send_email():
     data = request.json

@@ -4,21 +4,24 @@ from email.mime.text import MIMEText
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
-from ai_assistant import AIAssistant # Import the new class
+from ai_assistant import AIAssistant
 
+# Load environment variables
 load_dotenv()
 
 GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
-SENDER_EMAIL = 'aryanmokashi28@gmail.com'
-RECEIVER_EMAIL = 'aryanmokashi28@gmail.com'
+SENDER_EMAIL = os.getenv("SENDER_EMAIL")
+RECEIVER_EMAIL = os.getenv("RECEIVER_EMAIL")
 
-if not GMAIL_APP_PASSWORD:
-    raise ValueError("GMAIL_APP_PASSWORD not set. Please check your .env file.")
+if not all([GMAIL_APP_PASSWORD, SENDER_EMAIL, RECEIVER_EMAIL]):
+    raise ValueError("Email environment variables not set. Please check your .env file.")
 
+# Initialize Flask app
 app = Flask(__name__)
 CORS(app)
 
-ai_assistant = AIAssistant() # Instantiate the AI assistant class
+# Instantiate AI Assistant
+ai_assistant = AIAssistant()
 
 @app.route('/send-email', methods=['POST'])
 def send_email():
@@ -44,7 +47,7 @@ def send_email():
             smtp.send_message(msg)
         return jsonify({"message": "Email sent successfully!"}), 200
     except Exception as e:
-        print(f"Error sending email: {e}")
+        app.logger.error(f"Error sending email: {e}")
         return jsonify({"message": "Failed to send email"}), 500
 
 @app.route('/api/ai_query', methods=['POST'])
@@ -54,8 +57,8 @@ def ai_query():
     if not query:
         return jsonify({"message": "No query provided."}), 400
 
-    response = ai_assistant.process_query(query) # Use the new class here
+    response = ai_assistant.process_query(query)
     return jsonify(response)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True)  # On Render, gunicorn handles running

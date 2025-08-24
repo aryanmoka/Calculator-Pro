@@ -18,10 +18,10 @@ export const ContactForm: React.FC = () => {
     setStatus('submitting');
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/send-email', {
+      const response = await fetch('https://omnicalc-7fof.onrender.com/send-email', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         },
         body: JSON.stringify({ name, email, message }),
       });

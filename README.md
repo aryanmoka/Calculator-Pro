@@ -2,6 +2,10 @@
 
 Calculator-Pro is a comprehensive web application offering a suite of calculators and conversion tools, including an AI-powered assistant. It is built with React, TypeScript, Tailwind CSS, and features a Python backend for AI functionalities.
 
+🔗 Live Demo
+
+👉 [Try CookBot Here]((https://omnicalcpro.netlify.app/))
+
 ## Features
 - **Standard Calculator**
 - **Scientific Calculator**

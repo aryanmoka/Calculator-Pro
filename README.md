@@ -4,7 +4,7 @@ Calculator-Pro is a comprehensive web application offering a suite of calculator
 
 🔗 Live Demo
 
-👉 [Try CookBot Here]((https://omnicalcpro.netlify.app/))
+👉 [Try the Calculator Here](https://omnicalcpro.netlify.app/)
 
 ## Features
 - **Standard Calculator**
